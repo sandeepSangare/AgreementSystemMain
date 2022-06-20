@@ -1,0 +1,142 @@
+﻿@model IEnumerable<AgreementSystem.Models.AgreementView>
+
+@{
+    ViewData["Title"] = "Agreement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#tbAgreement").DataTable({
+
+            //"processing": true, // for show progress bar
+            //"serverSide": true, // for process server side
+            //"filter": true, // this is for disable filter (search box)
+            //"orderMulti": false, // for disable multiple column at once
+            //"pageLength": 5,
+
+            "ajax": {
+                "url": "/Home/GetAgreement",
+                "type": "POST",
+                "datatype": "json",
+                "dataSrc": "",
+            },
+
+            //"columnDefs":
+            //    [{
+            //        "targets": [0],
+            //        "visible": false,
+            //        "searchable": false
+            //    },
+            //    {
+            //        "targets": [7],
+            //        "searchable": false,
+            //        "orderable": false
+            //    },
+            //    {
+            //        "targets": [8],
+            //        "searchable": false,
+            //        "orderable": false
+            //    },
+            //    {
+            //        "targets": [9],
+            //        "searchable": false,
+            //        "orderable": false
+            //    }],
+
+            "columns": [
+                { 'data': 'id' },
+                { 'data': 'product_Description' },
+                { 'data': 'group_Description' },
+                { 'data': 'effective_Date' },
+                { 'data': 'expiration_Date' },
+                { 'data': 'product_Price' },
+                { 'data': 'new_Price' },
+                { 'data': 'active' },
+                { 'data': null, title: 'Edit', wrap: true, "render": function (item) { return '<div class="btn-group"> <button type="button"  class="btn btn-warning" onclick="Edit(' + item.id + ')">Edit</button></div>' } },
+                { 'data': null, title: 'Delete', wrap: true, "render": function (item) { return '<div class="btn-group"> <button type="button"  class="btn btn-warning" onclick="DeleteData(' + item.id + ')">Delete</button></div>' } }
+            ]
+
+        });
+    });
+
+    function Edit(id) {
+        var placeHolder = $("#PlaceHolder");
+        var url = "/Home/Create/"+id;
+        $.get(url).done(function (data) {
+            placeHolder.html(data);
+            $("#btnAdd").html('Update')
+            placeHolder.find('.modal').modal('show');
+        })
+    }
+
+    function DeleteData(ID) {
+        if (confirm("Are you sure you want to delete ...?")) {
+            Delete(ID);
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    function Delete(ID) {
+        var url = '@Url.Content("~/")' + "Home/DeleteAgreement";
+        $.post(url, { ID: ID }, function (data) {
+            if (data == "Deleted") {
+                window.location.reload();
+            }
+            else {
+                alert("Something Went Wrong!");
+            }
+        });
+    }
+
+</script>
+<h1>Agreement</h1>
+<div id="PlaceHolder"> </div>
+<p>
+    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addAgreement" data-url="@Url.Action("Create")">Add Agreement</button>
+</p>
+<table  id="tbAgreement" class="display responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Product Description
+            </th>
+            <th>
+                Group Description
+            </th>
+            <th>
+                Effective Date
+            </th>
+            <th>
+                Expiration Date
+            </th>
+            <th>
+                Product Price
+            </th>
+            <th>
+                New Price
+            </th>
+            <th>
+                Active
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

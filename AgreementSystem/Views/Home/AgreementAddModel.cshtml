@@ -1,0 +1,83 @@
+﻿@model AgreementSystem.Models.Agreement
+
+
+<div class="modal fade" id="addAgreement">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Product_Group_Id" class="control-label"></label>
+                        <select asp-for="Product_Group_Id" class="form-control" asp-items="ViewBag.Product_Group_Id" onchange="FillProduct()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Product_Id" class="control-label"></label>
+                        <select asp-for="Product_Id" class="form-control" asp-items="ViewBag.Product_Id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Effective_Date" class="control-label"></label>
+                        <input asp-for="Effective_Date" class="form-control" />
+                        <span asp-validation-for="Effective_Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Expiration_Date" class="control-label"></label>
+                        <input asp-for="Expiration_Date" class="form-control" />
+                        <span asp-validation-for="Expiration_Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Product_Price" class="control-label"></label>
+                        <input asp-for="Product_Price" class="form-control" />
+                        <span asp-validation-for="Product_Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="New_Price" class="control-label"></label>
+                        <input asp-for="New_Price" class="form-control" />
+                        <span asp-validation-for="New_Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Active" class="control-label"></label>
+                        <input asp-for="Active" class="form-control" style="width: 21px;" />
+                        <span asp-validation-for="Active" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnAdd" type="button" class="btn btn-primary" data-save="modal">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    function FillProduct() {
+        var Product_Group_Id = $('#Product_Group_Id').val();
+        $.ajax({
+            url: '/Home/Product_Group',
+            type: "GET",
+            dataType: "JSON",
+            data: { State: Product_Group_Id },
+            success: function (Products) {
+                $("#Product_Id").html(""); 
+                $.each(Products, function (i, Product) {
+                    $("#Product_Id").append(
+                        $('<option></option>').val(Product.Id).html(Product.Product_Description));
+                });
+            }
+        });
+    }
+</script>
+}
