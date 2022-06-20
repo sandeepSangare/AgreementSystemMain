@@ -104,6 +104,7 @@ namespace AgreementSystem.Controllers
                               }).ToList();
             ViewBag.Product_Group_Id = Product_Group_Id;
             ViewBag.Product_Id = Product_Id;
+
             
             return PartialView("AgreementAddModel", arg);
         
