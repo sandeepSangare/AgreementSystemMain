@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace AgreementSystem.Controllers
 {
+    [Authorize]
     public class AgreementController : Controller
     {
         private readonly ILogger<HomeController> _logger;

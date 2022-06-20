@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AgreementSystem.Controllers
 {
-    
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
