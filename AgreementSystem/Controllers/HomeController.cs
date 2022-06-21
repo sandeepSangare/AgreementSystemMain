@@ -39,10 +39,11 @@ namespace AgreementSystem.Controllers
         public ActionResult GetAgreement()
         {
             IEnumerable<AgreementView> selection = null;
-
+            string UserID=_userManager.GetUserId(User);
             selection = (from a in _Cotext.Agreements
                          join pc in _Cotext.Products on a.Product_Id equals pc.Id
                          join c in _Cotext.ProductGroups on pc.Product_Group_Id equals c.Id
+                         where a.User_Id== UserID
                          select new AgreementView
                          {
                              Id=a.ID,
