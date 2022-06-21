@@ -12,7 +12,7 @@ namespace AgreementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }
-        [Required]
+        
         public string User_Id { get; set; }
         [ForeignKey("ProductGroup")]
         [Required]
