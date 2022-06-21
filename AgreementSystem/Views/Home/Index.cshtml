@@ -4,9 +4,10 @@
     ViewData["Title"] = "Agreement";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+@*<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />*@
 <script src="~/js/Index.js"></script>
 <script src="~/js/AgreementAddModel.js"></script>
 <h1>Agreement</h1>
@@ -14,7 +15,7 @@
 <p>
     <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addAgreement" data-url="@Url.Action("Create")">Add Agreement</button>
 </p>
-<table  id="tbAgreement" class="display responsive nowrap" style="width:100%">
+<table id="tbAgreement" class="display responsive nowrap" style="width:100%">
     <thead>
         <tr>
             <th>

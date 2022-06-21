@@ -42,14 +42,18 @@ function DeleteData(ID) {
 }
 
 
-function Delete(ID) {
-    var url = '@Url.Content("~/")' + "Home/DeleteAgreement";
-    $.post(url, { ID: ID }, function (data) {
+function Delete(id) {
+    var url = "/Home/DeleteAgreement";
+    $.post(url, { id: id }, function (data) {
         if (data == "Deleted") {
             window.location.reload();
         }
         else {
             alert("Something Went Wrong!");
         }
-    });
+    }).done(function (data) {
+        console.log("done");
+    }).fail(function (data) {
+        console.log("fail");
+    }) ;
 }
