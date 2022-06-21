@@ -12,11 +12,14 @@ namespace AgreementSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }
+        [Required]
         public string User_Id { get; set; }
         [ForeignKey("ProductGroup")]
+        [Required]
         public int Product_Group_Id { get; set; }
         public ProductGroup ProductGroup { get; set; }
         [ForeignKey("Product")]
+        [Required]
         public int Product_Id { get; set; }
         public Product Product { get; set; }
         [DataType(DataType.Date)]

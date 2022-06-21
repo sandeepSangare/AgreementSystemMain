@@ -43,3 +43,19 @@ $(function () {
 
 
 
+function FillProduct() {
+    var Id = $('#Product_Group_Id').val();
+    $.ajax({
+        url: '/Home/Products/'+Id,
+        type: "GET",
+        dataType: "JSON",
+        success: function (Products) {
+            console.log(Products);
+            $("#Product_Id").html("");
+            $.each(Products, function (i, Product) {
+                $("#Product_Id").append(
+                    $('<option></option>').val(Product.id).html(Product.product_Description));
+            });
+        }
+    });
+}

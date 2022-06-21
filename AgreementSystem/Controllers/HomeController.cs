@@ -111,10 +111,10 @@ namespace AgreementSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Product_Group(int id)
+        public IActionResult Products(int Id)
         {
-            var Product_Group_Id = _Cotext.Products.Where(c => c.Product_Group_Id == id);
-            return Json(Product_Group_Id);
+            var Products = _Cotext.Products.Where(c => c.Product_Group_Id == Id).ToList(); ;
+            return Json(Products);
         }
 
 

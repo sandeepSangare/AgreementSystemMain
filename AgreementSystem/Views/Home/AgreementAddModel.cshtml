@@ -1,6 +1,6 @@
 ﻿@model AgreementSystem.Models.Agreement
 
-
+<script src="~/js/AgreementAddModel.js"></script>
 <div class="modal fade" id="addAgreement">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,11 +13,11 @@
 
                     <div class="form-group">
                         <label asp-for="Product_Group_Id" class="control-label"></label>
-                        <select asp-for="Product_Group_Id" class="form-control" asp-items="ViewBag.Product_Group_Id" onchange="FillProduct()"></select>
+                        <select id="Product_Group_Id" asp-for="Product_Group_Id" class="form-control" asp-items="ViewBag.Product_Group_Id" onchange="FillProduct()"></select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Product_Id" class="control-label"></label>
-                        <select asp-for="Product_Id" class="form-control" asp-items="ViewBag.Product_Id"></select>
+                        <select ID="Product_Id" asp-for="Product_Id" class="form-control" asp-items="ViewBag.Product_Id"></select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Effective_Date" class="control-label"></label>
@@ -61,23 +61,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-<script>
-    function FillProduct() {
-        var Product_Group_Id = $('#Product_Group_Id').val();
-        $.ajax({
-            url: '/Home/Product_Group',
-            type: "GET",
-            dataType: "JSON",
-            data: { State: Product_Group_Id },
-            success: function (Products) {
-                $("#Product_Id").html(""); 
-                $.each(Products, function (i, Product) {
-                    $("#Product_Id").append(
-                        $('<option></option>').val(Product.Id).html(Product.Product_Description));
-                });
-            }
-        });
+    
     }
-</script>
-}
+
