@@ -21,6 +21,8 @@ namespace AgreementSystem
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+
                 });
     }
 }

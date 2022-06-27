@@ -56,7 +56,7 @@ namespace AgreementSystem.Controllers
                              Product_Price = a.Product_Price,
                              New_Price = a.New_Price,
                              Active = a.Active
-                         }).ToList().OrderBy(a=>a.Id);
+                         }).ToList().OrderBy(a=>a.Id);    
 
             return Json(selection);
 
